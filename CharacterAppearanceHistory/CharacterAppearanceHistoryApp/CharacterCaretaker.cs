@@ -5,7 +5,7 @@
     // It works with all mementos via the base Memento interface.
     class CharacterManager
     {
-        private List<IMemento> _mementos = new List<IMemento>();
+        private List<ICharacterMemento> _mementos = new List<ICharacterMemento>();
 
         private Character _character = null;
 
