@@ -17,10 +17,10 @@
             Console.WriteLine();
             characterManager.PrintHistory();
 
-            Console.WriteLine("\nClient: Now, let's rollback!\n");
+            Console.WriteLine("\nProgramMain: first undo!\n");
             characterManager.Undo();
 
-            Console.WriteLine("\n\nClient: Once more!\n");
+            Console.WriteLine("\n\nProgramMain: second undo!\n");
             characterManager.Undo();
 
             Console.WriteLine();
