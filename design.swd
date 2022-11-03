@@ -1,49 +1,30 @@
 @startuml MementoCD
-class Pants{
-    -int size
-    -String color
-}
 
-class Shirt {
-    -int size
-    -String color
-}
-
-class Shoes {
-    -int size
-    -String color
-}
-
-class Head  {
-   - String eyeColor;
-   - String hairColor;
-}
+Character ..> CharacterMemento
+CharacterCaretaker --> CharacterMemento
 
 class CharacterMemento {
    -String Name;
-   -int Age;
-   -Pants pants;
-   -Shirt shirts;
-   -Shoes shoes;
-   -Head head;
-   CharacterMemento(\n String name, int age,\n Pants pants, Shirt shirts, \n Shoes shoes, Head head)
+   -string Pants;
+   -string Shirt;
+   -string Shoes;
+   CharacterMemento(string Name, string Pants, string Shirt, string Shoes)
 }
 
 class Character {
    -String Name;
-   -int Age;
-   -Pants pants;
-   -Shirt shirts;
-   -Shoes shoes;
-   -Head head;
+   -string Pants;
+   -string Shirt;
+   -string Shoes;
 
-   +CharacterMemento save()
+   +CharacterMemento Save()
    +void restore(CharacterMemento memento)
-   +void change()
 }
 
 class CharacterCaretaker {
    CharacterMemento : CharacterMemento 
    List<CharacterMemento> : CharacterMemento 
+   DoSomething()
+   Undo()
 }
 @enduml
