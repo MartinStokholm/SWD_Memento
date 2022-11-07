@@ -26,36 +26,36 @@ namespace CharacterAppearanceHistoryApp
 
         public CharacterMemento(string color, string size, string strength)
         {
-            this._color = color;
-            this._size = size;
-            this._strength = strength;
-            this._date = DateTime.Now;
+            _color = color;
+            _size = size;
+            _strength = strength;
+            _date = DateTime.Now;
         }
 
         public string GetColor()
         {
-            return this._color;
+            return _color;
         }
 
         public string GetSize()
         {
-            return this._size;
+            return _size;
         }
 
         public string GetStrength()
         {
-            return this._strength;
+            return _strength;
         }
         
         // helper methods for meta data about the CharacterMementos 
         public string GetName()
         {
-            return $"{this._date} // {this._color} : {this._size} : {this._strength}";
+            return $"{_date} // {_color} : {_size} : {_strength}";
         }
 
         public DateTime GetDate()
         {
-            return this._date;
+            return _date;
         }
     }
 }
