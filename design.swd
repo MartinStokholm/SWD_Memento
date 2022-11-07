@@ -1,30 +1,46 @@
 @startuml MementoCD
-
-Character ..> CharacterMemento
-CharacterCaretaker --> CharacterMemento
+interface ICharacterMemento {
+   + GetName() : string;
+   + GetColor() : string;
+   + GetSize() : string;
+   + GetStrength() : string;
+   + GetDate() : DateTime;
+}
 
 class CharacterMemento {
-   -String Name;
-   -string Pants;
-   -string Shirt;
-   -string Shoes;
-   CharacterMemento(string Name, string Pants, string Shirt, string Shoes)
+   -_color : string;
+   -_size : string;
+   -_strength : string;
+   -_date : DateTime;
+
+   + GetColor() : string;
+   + GetSize() : string;
+   + GetStrength() : string;
+   + GetName() : string;
+   + GetDate() : DateTime;
 }
 
 class Character {
-   -String Name;
-   -string Pants;
-   -string Shirt;
-   -string Shoes;
+   -_color : string;
+   -_size : string;
+   -_strength : string;
 
-   +CharacterMemento Save()
-   +void restore(CharacterMemento memento)
+   + ChangeAppearance(newColor : string, 
+   newSize : string="medium", newStrength : string="average")
+   + Save() : ICharacterMemento
+   + Restore(memento : ICharacterMemento) : void
 }
 
-class CharacterCaretaker {
-   CharacterMemento : CharacterMemento 
-   List<CharacterMemento> : CharacterMemento 
-   DoSomething()
-   Undo()
+class CharacterManager {
+   -_mementos : List<ICharacterMemento>;
+   -_character : Character;
+   + Backup() : void;
+   + Undo() : void;
+   + PrintHistory() : void;
 }
+
+ICharacterMemento ^-- CharacterMemento
+CharacterManager -> ICharacterMemento
+CharacterManager --> Character
+
 @enduml
