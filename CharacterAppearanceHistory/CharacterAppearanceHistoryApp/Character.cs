@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 namespace CharacterAppearanceHistoryApp
 {
     // The Originator holds some important state that may change over time. It
@@ -15,10 +11,10 @@ namespace CharacterAppearanceHistoryApp
         private string _strength;
         public Character(string newColor, string newSize = "medium", string newStrength = "average")
         {
-            this._color = newColor;
-            this._size = newSize;
-            this._strength = newStrength;
-            System.Console.WriteLine($"Character: I am a {this._color}, {this._size}, {this._strength} character.");
+            _color = newColor;
+            _size = newSize;
+            _strength = newStrength;
+            Console.WriteLine($"Character: I am a {_color}, {_size}, {_strength} character.");
         }
 
         // The Originator's business logic may affect its internal state.
@@ -26,16 +22,16 @@ namespace CharacterAppearanceHistoryApp
         // methods of the business logic via the save() method.
         public void ChangeAppearance(string newColor, string newSize = "medium", string newStrength = "average")
         {
-            System.Console.WriteLine($"Character: I am changing my appearance to {newColor}, {newSize}, {newStrength}.");
-            this._color = newColor;
-            this._size = newSize;
-            this._strength = newStrength;
+            Console.WriteLine($"Character: I am changing my appearance to {newColor}, {newSize}, {newStrength}.");
+            _color = newColor;
+            _size = newSize;
+            _strength = newStrength;
         }
 
         // Saves the current state inside a memento.
         public ICharacterMemento Save()
         {
-            return new CharacterMemento(this._color, this._size, this._strength);
+            return new CharacterMemento(_color, _size, _strength);
         }
 
         // Restores the Originator's state from a memento object.
@@ -43,18 +39,17 @@ namespace CharacterAppearanceHistoryApp
         {
             if (!(memento is CharacterMemento))
             {
-                throw new Exception("Unknown memento class " + memento.ToString());
+                throw new Exception("Unknown memento class " + memento);
             }
 
-            this._color = memento.GetColor();
+            _color = memento.GetColor();
             Console.Write($"Character: my color is now changed to: {_color}");
             
-            this._size = memento.GetSize();
+            _size = memento.GetSize();
             Console.Write($", my size is now changed to: {_size}");
-            this._strength = memento.GetStrength();
-            Console.WriteLine($", my strength is now changed to: {_strength}");
             
+            _strength = memento.GetStrength();
+            Console.WriteLine($", my strength is now changed to: {_strength}");
         }
     }
-
 }

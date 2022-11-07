@@ -5,39 +5,39 @@
     // It works with all mementos via the base Memento interface.
     class CharacterManager
     {
-        private List<ICharacterMemento> _mementos = new List<ICharacterMemento>();
+        private List<ICharacterMemento> _mementos = new();
 
-        private Character _character = null;
+        private Character _character;
 
         public CharacterManager(Character character)
         {
-            this._character = character;
+            _character = character;
         }
 
         public void Backup()
         {
             Console.WriteLine("\nCharacterHistory: Saving Character state...");
-            this._mementos.Add(this._character.Save());
+            _mementos.Add(_character.Save());
         }
 
         public void Undo()
         {
-            if (this._mementos.Count == 0) { return; }
+            if (_mementos.Count == 0) { return; }
 
-            var memento = this._mementos.Last();
-            this._mementos.Remove(memento);
+            var memento = _mementos.Last();
+            _mementos.Remove(memento);
 
             Console.WriteLine("CharacterHistory: Restoring state to: " + memento.GetName());
 
-            try { this._character.Restore(memento); }
-            catch (Exception) { this.Undo(); }
+            try { _character.Restore(memento); }
+            catch (Exception) { Undo(); }
         }
 
         public void PrintHistory()
         {
             Console.WriteLine("CharacterHistory: List of mementos:");
 
-            foreach (var memento in this._mementos)
+            foreach (var memento in _mementos)
             {
                 Console.WriteLine(memento.GetName());
             }
