@@ -28,6 +28,24 @@ namespace CharacterAppearanceHistoryApp
             _strength = newStrength;
         }
 
+        public void ChangeColor(string newColor)
+        {
+            Console.WriteLine($"Character: I am changing my color to {newColor}.");
+            _color = newColor;
+        }
+
+        public void ChangeSize(string newSize)
+        {
+            Console.WriteLine($"Character: I am changing my size to {newSize}.");
+            _size = newSize;
+        }
+
+        public void ChangeStrength(string newStrength)
+        {
+            Console.WriteLine($"Character: I am changing my strength to {newStrength}.");
+            _strength = newStrength;
+        }
+
         // Saves the current state inside a memento.
         public ICharacterMemento Save()
         {
