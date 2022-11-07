@@ -12,8 +12,13 @@
         public CharacterManager(Character character)
         {
             _character = character;
+            _character.CharacterChanged += HandleCharacterEvent;
         }
 
+        public void HandleCharacterEvent(object s, CharacterChangedEventArgs e)
+        {
+            Backup();
+        }
         public void Backup()
         {
             Console.WriteLine("\nCharacterHistory: Saving Character state...");
