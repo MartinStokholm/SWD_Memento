@@ -6,11 +6,9 @@ namespace CharacterAppearanceHistoryApp
     public interface ICharacterMemento
     {
         string GetName();
-
         string GetColor();
         string GetSize();
         string GetStrength();
-
         DateTime GetDate();
     }
 
@@ -21,7 +19,6 @@ namespace CharacterAppearanceHistoryApp
         private string _color;
         private string _size;
         private string _strength;
-
         private DateTime _date;
 
         public CharacterMemento(string color, string size, string strength)
