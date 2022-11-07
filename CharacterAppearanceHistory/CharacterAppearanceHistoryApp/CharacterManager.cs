@@ -13,6 +13,7 @@
         {
             _character = character;
             _character.CharacterChanged += HandleCharacterEvent;
+            Backup();
         }
 
         public void HandleCharacterEvent(object s, CharacterChangedEventArgs e)
@@ -27,10 +28,10 @@
 
         public void Undo()
         {
-            if (_mementos.Count == 0) { return; }
-
+            if (_mementos.Count == 0) {return;}
+            if (_mementos.Count > 1) 
+                _mementos.Remove(_mementos.Last());
             var memento = _mementos.Last();
-            _mementos.Remove(memento);
 
             Console.WriteLine("CharacterHistory: Restoring state to: " + memento.GetName());
 
