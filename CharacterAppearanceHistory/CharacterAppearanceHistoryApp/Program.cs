@@ -9,10 +9,10 @@
             CharacterManager characterManager = new CharacterManager(character);
 
             characterManager.Backup();
-            character.ChangeAppearance("red, small, strong");
-
+            character.ChangeAppearance("red", "small", "strong");
+            
             characterManager.Backup();
-            character.ChangeAppearance("blue, large, weak");
+            character.ChangeAppearance("blue", "large", "weak");
 
             Console.WriteLine();
             characterManager.PrintHistory();
