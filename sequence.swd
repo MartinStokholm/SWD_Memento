@@ -1,5 +1,5 @@
 @startuml MementoSD
-
+title Example: Memento with Observer
 participant Character
 participant CharacterMemento
 participant CharacterManager
@@ -12,6 +12,13 @@ activate CharacterManager
 CharacterManager -> CharacterManager : Backup()
 activate CharacterManager
 CharacterManager -> Character : Save()
+activate Character
+Character -> CharacterMemento : CharacterMemento()
+activate CharacterMemento
+CharacterMemento --> Character : new CharacterMemento
+deactivate 
+Character --> CharacterManager : ICharacterMemento
+deactivate Character
 deactivate CharacterManager
 deactivate CharacterManager
 
@@ -19,14 +26,17 @@ deactivate CharacterManager
 -> CharacterManager : PrintHistory()
 activate CharacterManager
 loop foreach CharcterMemento in list
-    CharacterManager -> CharacterMemento : GetName()
+    CharacterManager -> CharacterMemento : GetState()
+    activate CharacterMemento
+    CharacterMemento --> CharacterManager : string
+    deactivate CharacterMemento
 end
 deactivate CharacterManager
 
 
 -> CharacterManager : Undo()
 activate CharacterManager
-CharacterManager -> Character : Restore()
+CharacterManager -> Character : Restore(ICharacterMemento)
 activate Character
 Character -> CharacterMemento : GetColor()
 activate CharacterMemento
