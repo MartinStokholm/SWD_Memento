@@ -1,6 +1,6 @@
 @startuml MementoCD
 interface ICharacterMemento {
-   + GetName() : string;
+   + GetState() : string;
    + GetColor() : string;
    + GetSize() : string;
    + GetStrength() : string;
@@ -16,7 +16,7 @@ class CharacterMemento {
    + GetColor() : string;
    + GetSize() : string;
    + GetStrength() : string;
-   + GetName() : string;
+   + GetState() : string;
    + GetDate() : DateTime;
 }
 
@@ -24,12 +24,17 @@ class Character {
    -_color : string;
    -_size : string;
    -_strength : string;
-
+   
    + ChangeAppearance(newColor : string, 
-   newSize : string="medium", newStrength : string="average")
+   newSize : string="medium",\nnewStrength : string="average") : void
+   + ChangeColor( newColor : string) : void
+   + ChangeSize( newSize : string) : void
+   + ChangeStrength( newStrength : string) : void
    + Save() : ICharacterMemento
    + Restore(memento : ICharacterMemento) : void
 }
+
+
 
 class CharacterManager {
    -_mementos : List<ICharacterMemento>;
@@ -39,8 +44,73 @@ class CharacterManager {
    + PrintHistory() : void;
 }
 
-ICharacterMemento ^-- CharacterMemento
-CharacterManager -> ICharacterMemento
+ICharacterMemento ^. CharacterMemento
+CharacterManager o-> ICharacterMemento
 CharacterManager --> Character
+Character .> CharacterMemento
+
+@enduml
+
+
+################################################
+################################################
+############### WITH EVENTS ####################
+############### DOWN BELOW: ####################
+################################################
+################################################
+
+
+@startuml
+
+interface ICharacterMemento {
+   + GetState() : string;
+   + GetColor() : string;
+   + GetSize() : string;
+   + GetStrength() : string;
+   + GetDate() : DateTime;
+}
+
+class CharacterMemento {
+   -_color : string;
+   -_size : string;
+   -_strength : string;
+   -_date : DateTime;
+
+   + GetColor() : string;
+   + GetSize() : string;
+   + GetStrength() : string;
+   + GetState() : string;
+   + GetDate() : DateTime;
+}
+
+class Character {
+   -_color : string;
+   -_size : string;
+   -_strength : string;
+   + CharacterChanged : EventHandler<CharacterChangedEventArgs>
+   + OnCharacterChanged(e : CharacterChangedEventArgs) : void
+   + ChangeAppearance(newColor : string, 
+   newSize : string="medium",\nnewStrength : string="average") : void
+   + ChangeColor( newColor : string) : void
+   + ChangeSize( newSize : string) : void
+   + ChangeStrength( newStrength : string) : void
+   + Save() : ICharacterMemento
+   + Restore(memento : ICharacterMemento) : void
+}
+
+class CharacterManager {
+   -_mementos : List<ICharacterMemento>;
+   -_character : Character;
+   + HandleCharacterEvent(s : object, e : CharacterChangedEventArgs) : void
+   + Backup() : void;
+   + Undo() : void;
+   + PrintHistory() : void;
+}
+
+ICharacterMemento ^. CharacterMemento
+CharacterManager o-> ICharacterMemento
+CharacterManager --> Character
+Character .> CharacterMemento
+
 
 @enduml
