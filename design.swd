@@ -44,7 +44,7 @@ class CharacterManager {
    + PrintHistory() : void;
 }
 
-ICharacterMemento ^-- CharacterMemento
+ICharacterMemento ^. CharacterMemento
 CharacterManager o-> ICharacterMemento
 CharacterManager --> Character
 Character .> CharacterMemento
@@ -107,7 +107,7 @@ class CharacterManager {
    + PrintHistory() : void;
 }
 
-ICharacterMemento ^-- CharacterMemento
+ICharacterMemento ^. CharacterMemento
 CharacterManager o-> ICharacterMemento
 CharacterManager --> Character
 Character .> CharacterMemento
