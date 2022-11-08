@@ -1,0 +1,34 @@
+@startuml MementoSD
+title Standard Memento
+
+participant Client
+participant "Originator" as o
+participant "<<Interface>>\nMemento" as m
+participant "Caretaker" as c
+
+Client -> o : apply change
+Client -> c : Backup()
+activate c
+c -> o : Save()
+activate o
+o -> m : Memento(state)
+activate m
+m --> o : new Memento
+deactivate 
+o --> c : Memento
+deactivate o
+deactivate c
+
+
+
+Client -> c : Undo()
+activate c
+c -> o : Restore(Memento)
+activate o
+o -> m : GetState()
+activate m
+m --> o : state
+deactivate m
+deactivate c
+
+@enduml
