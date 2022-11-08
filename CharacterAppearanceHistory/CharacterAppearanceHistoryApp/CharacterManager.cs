@@ -33,7 +33,7 @@
                 _mementos.Remove(_mementos.Last());
             var memento = _mementos.Last();
 
-            Console.WriteLine("CharacterHistory: Restoring state to: " + memento.GetName());
+            Console.WriteLine("CharacterHistory: Restoring state to: " + memento.GetState());
 
             try { _character.Restore(memento); }
             catch (Exception) { Undo(); }
@@ -45,7 +45,7 @@
 
             foreach (var memento in _mementos)
             {
-                Console.WriteLine(memento.GetName());
+                Console.WriteLine(memento.GetState());
             }
         }
     }

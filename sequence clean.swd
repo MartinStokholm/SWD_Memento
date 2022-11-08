@@ -1,15 +1,13 @@
 @startuml MementoSD
-mainframe **sd** Memento with observer
+mainframe **sd** Memento
 participant Character
 participant CharacterMemento
 participant CharacterManager
 
--> Character : <<Event>>\nOnCharacterChanged
+-> Character : ChangeAppearence()
 activate Character
-Character -> CharacterManager : HandleCharacterEvent()
 deactivate Character
-activate CharacterManager
-CharacterManager -> CharacterManager : Backup()
+-> CharacterManager : Backup()
 activate CharacterManager
 CharacterManager -> Character : Save()
 activate Character
