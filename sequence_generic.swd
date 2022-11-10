@@ -1,5 +1,5 @@
 @startuml MementoSD
-title Standard Memento
+mainframe **sd** Memento
 
 participant Client
 participant "Originator" as o
