@@ -22,7 +22,7 @@
         }
         public void Backup()
         {
-            Console.WriteLine("\nCharacterHistory: Saving Character state...");
+            Console.WriteLine("CharacterHistory: Saving Character state...");
             _mementos.Add(_character.Save());
         }
 
@@ -33,7 +33,7 @@
                 _mementos.Remove(_mementos.Last());
             var memento = _mementos.Last();
 
-            Console.WriteLine("CharacterHistory: Restoring state to: " + memento.GetState());
+            Console.WriteLine("CharacterHistory: Restoring state to: \n" + memento.GetState());
 
             try { _character.Restore(memento); }
             catch (Exception) { Undo(); }

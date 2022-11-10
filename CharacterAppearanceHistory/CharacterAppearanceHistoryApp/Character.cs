@@ -80,13 +80,13 @@ namespace CharacterAppearanceHistoryApp
             }
 
             _color = memento.GetColor();
-            Console.Write($"Character: my color is now changed to: {_color}");
+            Console.WriteLine($"Character:\n  my color is now: {_color},");
             
             _size = memento.GetSize();
-            Console.Write($", my size is now changed to: {_size}");
+            Console.WriteLine($"  my size is now: {_size},");
             
             _strength = memento.GetStrength();
-            Console.WriteLine($", my strength is now changed to: {_strength}");
+            Console.WriteLine($"  my strength is now: {_strength}");
         }
 
 
