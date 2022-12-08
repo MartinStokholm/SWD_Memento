@@ -12,22 +12,28 @@
         public CharacterManager(Character character)
         {
             _character = character;
+            _character.CharacterChanged += HandleCharacterEvent;
+            Backup();
         }
 
+        public void HandleCharacterEvent(object s, CharacterChangedEventArgs e)
+        {
+            Backup();
+        }
         public void Backup()
         {
-            Console.WriteLine("\nCharacterHistory: Saving Character state...");
+            Console.WriteLine("CharacterHistory: Saving Character state...");
             _mementos.Add(_character.Save());
         }
 
         public void Undo()
         {
-            if (_mementos.Count == 0) { return; }
-
+            if (_mementos.Count == 0) {return;}
+            if (_mementos.Count > 1) 
+                _mementos.Remove(_mementos.Last());
             var memento = _mementos.Last();
-            _mementos.Remove(memento);
 
-            Console.WriteLine("CharacterHistory: Restoring state to: " + memento.GetName());
+            Console.WriteLine("CharacterHistory: Restoring state to: \n" + memento.GetState());
 
             try { _character.Restore(memento); }
             catch (Exception) { Undo(); }
@@ -39,7 +45,7 @@
 
             foreach (var memento in _mementos)
             {
-                Console.WriteLine(memento.GetName());
+                Console.WriteLine(memento.GetState());
             }
         }
     }

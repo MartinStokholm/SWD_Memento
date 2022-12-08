@@ -1,0 +1,30 @@
+@startuml MementoCD
+interface Memento {
+   + GetState()
+}
+
+class ConcreteMemento {
+   -_state
+   + ConcreteMemento(state)
+   + GetState()
+}
+
+class Originator {
+   -_state
+
+   + Save() : Memento
+   + Restore(memento : Memento)
+}
+
+class Caretaker {
+   -_history : List<Memento>;
+   -_originator
+   + Backup()
+   + Undo()
+}
+
+Memento ^.. ConcreteMemento
+Caretaker o-> Memento
+Caretaker --> Originator
+Originator .> ConcreteMemento
+@enduml

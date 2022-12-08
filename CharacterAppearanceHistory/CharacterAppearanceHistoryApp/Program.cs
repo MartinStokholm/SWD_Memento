@@ -4,19 +4,16 @@
 var character = new Character("green");
 var characterManager = new CharacterManager(character);
 
-characterManager.Backup();
-character.ChangeAppearance("red", "small", "strong");
-            
-characterManager.Backup();
-character.ChangeAppearance("blue", "large", "weak");
-
-Console.WriteLine();
-characterManager.PrintHistory();
-
-Console.WriteLine("\nProgramMain: first undo!\n");
-characterManager.Undo();
-
-Console.WriteLine("\n\nProgramMain: second undo!\n");
-characterManager.Undo();
-
-Console.WriteLine();
+while (true)
+{
+    if (Console.KeyAvailable)
+    {
+        var keyPressed = Console.ReadKey(true);
+        
+        if (keyPressed.Key == ConsoleKey.R) character.ChangeColor("red");
+        if (keyPressed.Key == ConsoleKey.L) character.ChangeSize("large");
+        if (keyPressed.Key == ConsoleKey.P) characterManager.PrintHistory(); 
+        if (keyPressed.Key == ConsoleKey.U) characterManager.Undo();
+        if (keyPressed.Key == ConsoleKey.Escape) break;
+    }
+}

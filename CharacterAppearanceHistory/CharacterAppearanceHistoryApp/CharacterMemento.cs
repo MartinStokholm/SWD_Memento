@@ -5,7 +5,7 @@ namespace CharacterAppearanceHistoryApp
     // Originator's state.
     public interface ICharacterMemento
     {
-        string GetName();
+        string GetState();
         string GetColor();
         string GetSize();
         string GetStrength();
@@ -45,7 +45,7 @@ namespace CharacterAppearanceHistoryApp
         }
         
         // helper methods for meta data about the CharacterMementos 
-        public string GetName()
+        public string GetState()
         {
             return $"{_date} // {_color} : {_size} : {_strength}";
         }
